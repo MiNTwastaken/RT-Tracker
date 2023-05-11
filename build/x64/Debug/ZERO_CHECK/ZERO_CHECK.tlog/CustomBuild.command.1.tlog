@@ -1,0 +1,10 @@
+^C:\USERS\GIRTS\ONEDRIVE\DOCUMENTS\GITHUB\RT-TRACKER\BUILD\CMAKEFILES\EBBDE422341D1A8D4751ADDEF88754F4\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/girts/OneDrive/Documents/GitHub/RT-Tracker -BC:/Users/girts/OneDrive/Documents/GitHub/RT-Tracker/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/girts/OneDrive/Documents/GitHub/RT-Tracker/build/tracker.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
