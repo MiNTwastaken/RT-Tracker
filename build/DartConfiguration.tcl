@@ -4,14 +4,14 @@
 
 
 # Configuration directories and files
-SourceDirectory: C:/Users/girts/OneDrive/Documents/GitHub/RT-Tracker
-BuildDirectory: C:/Users/girts/OneDrive/Documents/GitHub/RT-Tracker/build
+SourceDirectory: C:/Users/visti/Desktop/Github Projects/RT-Tracker
+BuildDirectory: C:/Users/visti/Desktop/Github Projects/RT-Tracker/build
 
 # Where to place the cost data store
 CostDataFile: 
 
 # Site is something like machine.domain, i.e. pragmatic.crd
-Site: MSI
+Site: ASUSTUF
 
 # Build name is osname-revision-compiler, i.e. Linux-2.4.2-2smp-c++
 BuildName: Win32-MSBuild
@@ -27,7 +27,7 @@ SubmitInactivityTimeout:
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "C:/Program Files/CMake/bin/cmake.exe" "C:/Users/girts/OneDrive/Documents/GitHub/RT-Tracker"
+ConfigureCommand: "C:/Program Files/CMake/bin/cmake.exe" "C:/Users/visti/Desktop/Github Projects/RT-Tracker"
 MakeCommand: "C:\Program Files\CMake\bin\cmake.exe" --build . --config "${CTEST_CONFIGURATION_TYPE}"
 DefaultCTestConfigurationType: Release
 
@@ -63,7 +63,7 @@ UpdateOptions:
 UpdateType: git
 
 # Compiler info
-Compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.35.32215/bin/Hostx64/x64/cl.exe
+Compiler: C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.35.32215/bin/Hostx64/x64/cl.exe
 CompilerVersion: 19.35.32217.1
 
 # Dynamic analysis (MemCheck)

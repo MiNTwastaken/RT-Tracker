@@ -1,30 +1,30 @@
 #include <opencv2/opencv.hpp>
 #include <iostream>
-
-
 using namespace std;
 using namespace cv;
 
-RNG rng(12345);
-
 int main() {
-    cv::VideoCapture cap(2);
+    cv::VideoCapture cameraFeed(2);
 
-    if (!cap.isOpened()) {
-        std::cout << "DroidCam ded" << std::endl;
+    if (!cameraFeed.isOpened()) {
+        std::cout << "DroidCam is not working..." << std::endl;
         return -1;
     }
-    Ptr<BackgroundSubtractor> pBackSub = createBackgroundSubtractorMOG2();
+    // Use the MOG2 algorithm for outside motion detecting and the KNN for inside motion detecting.
+    // Both aren't perfect and get false flags for shadows and light reflections.
+    // Ptr<BackgroundSubtractorMOG2> pBackSub = createBackgroundSubtractorMOG2();
+    Ptr<BackgroundSubtractorKNN> pBackSub = createBackgroundSubtractorKNN();
     Mat frame;
     Mat frame_gray;
-    while (cap.read(frame)) {
-        
+    while (cameraFeed.read(frame)) {
 
         pBackSub->apply(frame, frame_gray);
+
+        // Making the kernel a little bit bigger for both morphology lines makes the detector less sensitive between frames.
         morphologyEx(frame_gray, frame_gray, MORPH_OPEN, getStructuringElement(MORPH_ELLIPSE, Size(3, 3)));
-        morphologyEx(frame_gray, frame_gray, MORPH_CLOSE, getStructuringElement(MORPH_ELLIPSE, Size(11, 11)));
+        morphologyEx(frame_gray, frame_gray, MORPH_CLOSE, getStructuringElement(MORPH_ELLIPSE, Size(3, 3)));
     
-        vector<vector<Point> > contours;
+        vector<vector<Point>> contours;
         findContours(frame_gray, contours, RETR_TREE, CHAIN_APPROX_SIMPLE);
 
         for (const auto& contour : contours)
@@ -33,28 +33,42 @@ int main() {
 
             Rect boundingBox = boundingRect(contour); // Get the bounding box of each contour
 
-            if (boundingBox.area() > 100) // Ignore small contours
+            if (boundingBox.area() > 500) // Ignore small contours
             {
                 rectangle(frame, boundingBox, Scalar(0, 0, 255), 2); // Draw a red bounding box around each moving object
             }
         }
+
+        // This erases any contours that are considered to be very small which are most likely false positives in movement(shadows, light reflections, etc.).
+        contours.erase(
+            remove_if(
+                contours.begin(), 
+                contours.end(), 
+                [](const vector<Point>& contour) { 
+                    return contour.empty() || boundingRect(contour).area() <= 500;
+                }
+            ), 
+            contours.end()
+        );
+
         cv::Mat video;
-        cap.read(video);
+        cameraFeed.read(video);
 
         if (video.empty()) {
-            std::cout << "video not availabL" << std::endl;
+            std::cout << "Video not available" << std::endl;
             break;
         }
         imshow("Tracking", frame);
-        cv::imshow("DroidCam Video", video);
+        cv::imshow("Camera Feed", video);
 
         int key = cv::waitKey(10);
+        // To exit the motion tracker, press Esc on your keyboard.
         if (key == 27) {
             break;
         }
     }
     
-    cap.release();
+    cameraFeed.release();
     cv::destroyAllWindows();
 
     return 0;

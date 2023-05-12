@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Users\girts\OneDrive\Documents\GitHub\RT-Tracker\build\CMakeFiles\ebbde422341d1a8d4751addef88754f4\NightlyMemoryCheck.rule">
+    <CustomBuild Include="C:\Users\visti\Desktop\Github Projects\RT-Tracker\build\CMakeFiles\66c446c9276d01508632f908812734e2\NightlyMemoryCheck.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Users\girts\OneDrive\Documents\GitHub\RT-Tracker\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\visti\Desktop\Github Projects\RT-Tracker\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="C:\Users\girts\OneDrive\Documents\GitHub\RT-Tracker\build\CMakeFiles\NightlyMemoryCheck" />
+    <None Include="C:\Users\visti\Desktop\Github Projects\RT-Tracker\build\CMakeFiles\NightlyMemoryCheck" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{2FC1FF45-BE25-3B99-9850-9C08B9D16873}</UniqueIdentifier>
+      <UniqueIdentifier>{CD601272-E2E3-3F31-9FC6-D2134D9230B7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

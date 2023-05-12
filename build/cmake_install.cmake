@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/girts/OneDrive/Documents/GitHub/RT-Tracker
+# Install script for directory: C:/Users/visti/Desktop/Github Projects/RT-Tracker
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/girts/OneDrive/Documents/GitHub/RT-Tracker/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/visti/Desktop/Github Projects/RT-Tracker/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
