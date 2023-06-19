@@ -25,8 +25,9 @@ int main() {
         morphologyEx(frame_gray, frame_gray, MORPH_CLOSE, getStructuringElement(MORPH_ELLIPSE, Size(3, 3)));
     
         vector<vector<Point>> contours;
-        findContours(frame_gray, contours, RETR_TREE, CHAIN_APPROX_SIMPLE);
+        findContours(frame_gray, contours, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
 
+        vector<vector<Point>> filteredContours;
         for (const auto& contour : contours)
         {
             if (contour.empty()) continue; // Check if the contour is empty
@@ -35,21 +36,10 @@ int main() {
 
             if (boundingBox.area() > 500) // Ignore small contours
             {
+                filteredContours.push_back(contour);
                 rectangle(frame, boundingBox, Scalar(0, 0, 255), 2); // Draw a red bounding box around each moving object
             }
         }
-
-        // This erases any contours that are considered to be very small which are most likely false positives in movement(shadows, light reflections, etc.).
-        contours.erase(
-            remove_if(
-                contours.begin(), 
-                contours.end(), 
-                [](const vector<Point>& contour) { 
-                    return contour.empty() || boundingRect(contour).area() <= 500;
-                }
-            ), 
-            contours.end()
-        );
 
         cv::Mat video;
         cameraFeed.read(video);
